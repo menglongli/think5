@@ -2,7 +2,6 @@
 namespace app\index\controller;
 class Multi
 {
-//    static private $appuid = "13271582882";
     static private $client_id = "Yo66StWQEVGA";
     static private $redirect_uri = 'http://kd.myyqn.com/multis';
     static private $client_secret = "442a5205430541d789210a57c4827c83";
@@ -43,9 +42,9 @@ class Multi
         $expires_in = $accessToken['expires_in'];
         $refresh_token = $accessToken['refresh_token'];
         $access_token = $accessToken['access_token'];
-//        $refresh_row = self::refreshToken($refresh_token);
-        $order = self::send($access_token,self::$orderData);
-//        dump($refresh_row);
+        //$refresh_row = self::refreshToken($refresh_token);
+        $order = self::send($access_token,self::$orderData);//导入订单
+        //  dump($refresh_row);
         dump($order);
         //array(3) {
         //  ["status"] => int(200)
@@ -120,8 +119,8 @@ class Multi
         ];
         ksort($arr);
         //        $str = http_build_query($arr,'','');
-//        $str = implode('',$arr);
-//        $strsign = sprintf("%s%s%s",self::$client_secret,$str,self::$client_secret);
+        //$str = implode('',$arr);
+        //$strsign = sprintf("%s%s%s",self::$client_secret,$str,self::$client_secret);
         $strsign = '';
         foreach($arr as $kk=>$vv){
             $strsign .=$kk . $vv;
@@ -131,7 +130,6 @@ class Multi
         $sign = strtoupper(md5($sign));     //API 输入参数签名结果,md5后再转大写
         $url ='https://b.kuaidi100.com/open/oauth/authorize?response_type=code&client_id='.self::$client_id.'&redirect_uri='.urlencode(self::$redirect_uri).'&state'.$state.'&timestamp='.$timestamp.'&sign='.$sign;
         header('Location:'.$url);            //这里跳转到授权登录页面，登录成功后将跳转到回调地址
-
     }
     #生成授权地址
     static function authorize2($state = 'test123') {
