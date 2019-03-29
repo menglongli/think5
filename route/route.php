@@ -11,8 +11,8 @@
 
 //组合变量规则
 //http://think5.com/public/index.php/item/long-45
-Route::get('item/:name-:id', 'index/index/read')->https(false)->domain('think5.com')
-    ->pattern(['name' => '\w+', 'id' => '\d+']);
+//Route::get('item/:name-:id', 'index/index/read')->https(false)->domain('think5.com')
+//    ->pattern(['name' => '\w+', 'id' => '\d+']);
 
 //http://think5.com/public/index.php/item-long-45
 //Route::get('item-<name>-<id>', 'index/index/read')
@@ -27,16 +27,20 @@ Route::get('item/:name-:id', 'index/index/read')->https(false)->domain('think5.c
 //Route::rule('new/:id','index/index/read')->name('new_read');
 
 //闭包  | 依赖注入
-Route::get('hello/:name', function (Response $response, $name) {
-    return $response
-        ->data('Hello,' . $name)
-        ->code(200)
-        ->contentType('text/plain');
-});
+//Route::get('hello/:name', function (Response $response, $name) {
+//    return $response
+//        ->data('Hello,' . $name)
+//        ->code(200)
+//        ->contentType('text/plain');
+//});
 
 Route::get('think', function () {
     return 'hello,ThinkPHP5!';
 });
+
+Route::get('auth','Multi/authorize');
+Route::get('auth2','Multi/authorize2');
+Route::get('multis','Multi/callback');
 
 //Route::get('hello/:name', 'index/hello');
 //变量用[ ]包含起来后就表示该变量是路由匹配的可选变量
